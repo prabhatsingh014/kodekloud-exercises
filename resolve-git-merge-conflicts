@@ -1,82 +1,31 @@
-max $ cd /home/max
-max $ ls -ltr
-total 4
-drwxr-sr-x    3 max      max           4096 Mar  7 04:29 story-blog
-max $ cd story-blog/
-max (master)$ ls -ltr
-total 16
--rw-r--r--    1 max      max           1086 Mar  7 04:29 lion-and-mouse.txt
--rw-r--r--    1 max      max            792 Mar  7 04:29 frogs-and-ox.txt
--rw-r--r--    1 max      max            102 Mar  7 04:29 story-index.txt
--rw-r--r--    1 max      max            807 Mar  7 04:29 fox-and-grapes.txt
-max (master)$ 
-max (master)$ git push -u origin main
-error: src refspec main does not match any.
-error: failed to push some refs to 'http://git.stratos.xfusioncorp.com/sarah/story-blog.git'
-max (master)$ git push -u origin master
-Username for 'http://git.stratos.xfusioncorp.com': max
-Password for 'http://max@git.stratos.xfusioncorp.com': 
-To http://git.stratos.xfusioncorp.com/sarah/story-blog.git
- ! [rejected]        master -> master (fetch first)
-error: failed to push some refs to 'http://git.stratos.xfusioncorp.com/sarah/story-blog.git'
-hint: Updates were rejected because the remote contains work that you do
-hint: not have locally. This is usually caused by another repository pushing
-hint: to the same ref. You may want to first integrate the remote changes
-hint: (e.g., 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-max (master)$ git pull
-remote: Enumerating objects: 4, done.
-remote: Counting objects: 100% (4/4), done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
-Unpacking objects: 100% (3/3), done.
-From http://git.stratos.xfusioncorp.com/sarah/story-blog
-   7779fc9..5e856da  master     -> origin/master
-Auto-merging story-index.txt
-CONFLICT (add/add): Merge conflict in story-index.txt
-Automatic merge failed; fix conflicts and then commit the result.
-max (master)$ vi story-index.txt 
-max (master)$ git push origin ^C
-max (master)$ git status
-On branch master
-Your branch and 'origin/master' have diverged,
-and have 1 and 1 different commits each, respectively.
-  (use "git pull" to merge the remote branch into yours)
-You have unmerged paths.
-  (fix conflicts and run "git commit")
+# Login to the server with the username max and its password
 
-Unmerged paths:
-  (use "git add <file>..." to mark resolution)
+# Change to its home directory
+# $ cd /home/max
 
-        both added:      story-index.txt
+# List the files and directory present in the directory
+# $ ls -ltr
 
-no changes added to commit (use "git add" and/or "git commit -a")
-max (master)$ git add .
-max (master)$ git commit -m 'fixed merge and corrected spelling'
-[master 482504c] fixed merge and corrected spelling
- Committer: Linux User <max@ststor01.stratos.xfusioncorp.com>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly. Run the
-following command and follow the instructions in your editor to edit
-your configuration file:
+# Change to the directory which is stored on gitlab
+# $ cd story-blog/
 
-    git config --global --edit
+# Try to push the changes in the directory to the origin on gitlab
+# (master)$ git push -u origin master
 
-After doing this, you may fix the identity used for this commit with:
+# Output will show the error with the code merge
 
-    git commit --amend --reset-author
-max (master)$ git push origin master
-Username for 'http://git.stratos.xfusioncorp.com': sarah
-Password for 'http://sarah@git.stratos.xfusioncorp.com': 
-Counting objects: 7, done.
-Delta compression using up to 36 threads.
-Compressing objects: 100% (7/7), done.
-Writing objects: 100% (7/7), 1.18 KiB | 0 bytes/s, done.
-Total 7 (delta 1), reused 0 (delta 0)
-remote: . Processing 1 references
-remote: Processed 1 references in total
-To http://git.stratos.xfusioncorp.com/sarah/story-blog.git
-   5e856da..482504c  master -> master
-max (master)$ 
-max (master)$ 
+# Fetch the latest commit from the git origin
+# max (master)$ git pull
+
+# Output will show the merge conflicts
+
+# Edit the file which has merge conflicts and update as required
+# (master)$ vi story-index.txt 
+
+# Below command will show the changed files/directories to be committed to the origin
+# (master)$ git status
+
+# Start committing the changes to the origin by running following commands
+# (master)$ git add .
+# (master)$ git commit -m 'fixed merge and corrected spelling'
+# (master)$ git push origin master
