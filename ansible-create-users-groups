@@ -1,0 +1,49 @@
+- hosts: stapp02
+  become: yes
+  vars_files:
+  - /home/thor/playbooks/data/users.yml
+  - /home/thor/playbooks/data/password.yml
+  tasks:
+  - name: Create groups on app server 3
+    group:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - admins
+    - developers
+
+  - name: Create users of admins group on app server 3
+    user:
+      name: "{{ item }}"
+      create_home: yes
+      groups: admins,wheel
+      append: yes
+      password: "{{ admins_pwd | string | password_hash('sha512') }}"
+    loop: "{{ admins }}"
+
+  - name: Create users of developers group on app server 3
+    user:
+      name: "{{ item }}"
+      create_home: no
+      home: /var/www
+      groups: developers
+      append: yes
+      password: "{{ devels_pwd | string | password_hash('sha512') }}"
+    loop: "{{ developers }}"
+
+vault_password_file = /home/thor/playbooks/secrets/vault.txt
+
+thor@jump_host ~/playbooks$ history
+    1  cat playbooks/inventory 
+    2  cat ~/playbooks/data/users.yml
+    3  vi ~/playbooks/add_users.yml
+    4  vi playbooks/ansible.cfg 
+    5  ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'ksH85UJjhb' --name 'devels_pwd'
+    6  ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'Rc5C9EyvbU' --name 'admins_pwd'
+    7  vi playbooks/data/password.yml
+    8  cat playbooks/add_users.yml 
+    9  cd playbooks/
+   10  ansible-playbook -i inventory add_users.yml 
+   11  vi add_users.yml 
+   12  ansible-playbook -i inventory add_users.yml 
+   13  history
