@@ -1,5 +1,9 @@
-# Create a pod definition file with the requested resources limits and request using vi editory
-# $ vi httpd-pod.yaml
+<!DOCHTML html>
+<html>
+<body>
+<h2># Create a pod definition file with the requested resources limits and request using vi editory</h2>
+
+<p># $ vi httpd-pod.yaml
 
 apiVersion: v1
 kind: Pod
@@ -16,14 +20,18 @@ spec:
       limits:
         memory: "20Mi"
         cpu: "100m"
+</p>
 
-# Save and exit the file
+<h2># Save and exit the file</h2>
 
-# Execute the following command to create the pod
-# $ kubectl apply -f httpd-pod.yaml 
+<h2># Execute the following command to create the pod</h2>
+<p># $ kubectl apply -f httpd-pod.yaml</p>
 
-# Execute the following command to monitor the state of the pod creation until it is Running
-# $ watch kubectl get pods
+<h2># Execute the following command to monitor the state of the pod creation until it is Running</h2>
+<p># $ watch kubectl get pods</p>
 
-# Execute the following command to describe the pod specification and see if the resource limits and requests are getting reflected correctly
-# $ kubectl describe pod httpd-pod
+<h2># Execute the following command to describe the pod specification and see if the resource limits and requests are getting reflected correctly</h2>
+<p># $ kubectl describe pod httpd-pod</p>
+
+</body>
+</html>
