@@ -1,13 +1,5 @@
-Last login: Mon Apr 11 05:19:35 UTC 2022 on pts/0
-thor@jump_host ~$ kubectl get noeds
-
-error: the server doesn't have a resource type "noeds"
-thor@jump_host ~$ 
-thor@jump_host ~$ kubectl get nodes
-NAME                      STATUS   ROLES                  AGE     VERSION
-kodekloud-control-plane   Ready    control-plane,master   3h18m   v1.20.5-rc.0.18+c4af4684437b37
-thor@jump_host ~$ 
-thor@jump_host ~$ kubectl create deployment nginx --image=nginx:latest --dry-run=client -o yaml
+# Create the yaml template for the deployment named nginx with image nginx:latest
+# $ kubectl create deployment nginx --image=nginx:latest --dry-run=client -o yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -32,12 +24,11 @@ spec:
         name: nginx
         resources: {}
 status: {}
-thor@jump_host ~$ 
-thor@jump_host ~$ kubectl create deployment nginx --image=nginx:latest --dry-run=client -o yaml > nginx.yaml
-thor@jump_host ~$ 
-thor@jump_host ~$ kubectl create deployment nginx --image=nginx:latest
-deployment.apps/nginx created
-thor@jump_host ~$ kubectl get pods --watch
-NAME                     READY   STATUS              RESTARTS   AGE
-nginx-55649fd747-hp48m   0/1     ContainerCreating   0          14s
-nginx-55649fd747-hp48m   1/1     Running             0          23s
+
+# $ kubectl create deployment nginx --image=nginx:latest --dry-run=client -o yaml > nginx.yaml
+
+# Create the deployment using below command
+# $ kubectl create deployment nginx --image=nginx:latest
+
+# Watch the status of pods until it is in "Running" state
+# $ kubectl get pods --watch
