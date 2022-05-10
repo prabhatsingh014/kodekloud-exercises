@@ -6,8 +6,8 @@
 
 # Create the deployment yaml file named httpd-deployment-devops.yaml with the specs mentioned in the task
 # Ensure to include the namespace in which deployment is supposed to be created
-$ vi httpd-deployent-devops.yaml
-
+# $ vi httpd-deployent-devops.yaml
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,7 +40,7 @@ spec:
 # Create the service yaml file named httpd-service-devops.yaml with the following content
 # Ensure to create the NodePort service
 # $ vi httpd-service-devops.yaml
-
+---
 apiVersion: v1
 kind: Service
 metadata:

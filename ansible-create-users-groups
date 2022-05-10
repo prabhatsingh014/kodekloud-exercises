@@ -1,3 +1,6 @@
+# Create the playbook for creating groups and users on the target nodes
+# $ vi add_users.yaml
+---
 - hosts: stapp02
   become: yes
   vars_files:
@@ -31,19 +34,18 @@
       password: "{{ devels_pwd | string | password_hash('sha512') }}"
     loop: "{{ developers }}"
 
+# Save the exit the file
+
+# Update the ansible.cfg file in /home/thor/playbooks directory with the following parameter
+# $ vi ~/playbooks/ansible.cfg
 vault_password_file = /home/thor/playbooks/secrets/vault.txt
 
-thor@jump_host ~/playbooks$ history
-    1  cat playbooks/inventory 
-    2  cat ~/playbooks/data/users.yml
-    3  vi ~/playbooks/add_users.yml
-    4  vi playbooks/ansible.cfg 
-    5  ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'ksH85UJjhb' --name 'devels_pwd'
-    6  ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'Rc5C9EyvbU' --name 'admins_pwd'
-    7  vi playbooks/data/password.yml
-    8  cat playbooks/add_users.yml 
-    9  cd playbooks/
-   10  ansible-playbook -i inventory add_users.yml 
-   11  vi add_users.yml 
-   12  ansible-playbook -i inventory add_users.yml 
-   13  history
+# Save and exit the file
+
+# Execute the ansible-vault command to generate the encrypted passwords for the admin and developer users
+# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'ksH85UJjhb' --name 'devels_pwd'
+# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'Rc5C9EyvbU' --name 'admins_pwd'
+
+# Execute the command to run the playbook
+# $ cd ~/ansible
+# $ ansible-playbook -i inventory add_users.yml

@@ -1,6 +1,6 @@
 # Create job definition file with name countdown-datacenter with the below content. Ensure to use "metadata" under spec.template.
 # $ vi countdown-datacenter.yaml
-
+---
 apiVersion: batch/v1
 kind: Job
 metadata:

@@ -1,5 +1,8 @@
-sudo mkdir /mnt/data
+# Create the directory on the host machine using the command
+# $ sudo mkdir /mnt/data
 
+# Create the PV creation yaml file
+# $ vi mysql-pv.yaml
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -16,6 +19,13 @@ spec:
   hostPath:
     path: "/mnt/data"
 
+# Save and exit the file
+
+# Create the persistent volume using the command
+# $ kubectl apply -f mysql-pv.yaml
+
+# Create the PVC creation yaml file
+# $ vi mysql-pv-claim.yaml
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -29,6 +39,13 @@ spec:
     requests:
       storage: 250Gi
 
+# Save and exit the file
+
+# Create the persistent volume claim using the command
+# $ kubectl apply -f mysql-pv-claim.yaml
+
+# Create the service creation yaml file
+# $ vi mysql-service.yaml
 ---
 apiVersion: v1
 kind: Service
@@ -49,6 +66,13 @@ spec:
 status:
   loadBalancer: {}
 
+# Save and exit the file
+
+# Create the service using the command
+# $ kubectl apply -f mysql-service.yaml
+
+# Create the secret creation yaml file
+# $ vi mysql-root-secret.yaml
 ---
 apiVersion: v1
 kind: Secret
@@ -58,6 +82,13 @@ type: kubernetes.io/basic-auth
 stringData:
   password: YUIidhb667
 
+# Save and exit the file
+
+# Create the secret using the command
+# $ kubectl apply -f mysql-root-secret.yaml
+
+# Create the secret creation yaml file
+# $ vi mysql-user-secret.yaml
 ---
 apiVersion: v1
 kind: Secret
@@ -68,6 +99,13 @@ stringData:
   username: kodekloud_sam
   password: YUIidhb667
 
+# Save and exit the file
+
+# Create the secret using the command
+# $ kubectl apply -f mysql-user-secret.yaml
+
+# Create the secret creation yaml file
+# $ vi mysql-db-secret.yaml
 ---
 apiVersion: v1
 kind: Secret
@@ -77,6 +115,13 @@ type: Opaque
 stringData:
   database: kodekloud_db4
 
+# Save and exit the file
+
+# Create the secret using the command
+# $ kubectl apply -f mysql-db-secret.yaml
+
+# Create the deployment creation yaml file
+# $ vi mysql-deployment.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -131,3 +176,11 @@ spec:
           claimName: mysql-pv-claim
 
 status: {}
+
+# Save and exit the file
+
+# Create the deployment using the command
+# $ kubectl apply -f mysql-deployment.yaml
+
+# Verify the object creation using the command
+# $ kubectl get pv,pvc,secret,service,deployment

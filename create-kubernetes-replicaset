@@ -2,6 +2,7 @@
 # Ensure to verify the values of metadata.name, labels, replicas, selector, container name and image name.
 
 # $ vi httpd-replicaset.yaml
+---
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -10,7 +11,6 @@ metadata:
     app: httpd_app
     type: front-end
 spec:
-  # modify replicas according to your case
   replicas: 4
   selector:
     matchLabels:

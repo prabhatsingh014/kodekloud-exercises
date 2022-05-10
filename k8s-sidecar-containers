@@ -1,7 +1,7 @@
-#Create multi-pod container, one is web server and other is so called sidecar which help in executing few important tasks.
+# Create multi-pod container, one is web server and other is so called sidecar which help in executing few important tasks.
 
-#webserver.yaml
-
+# $ vi webserver.yaml
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -23,11 +23,13 @@ spec:
   - name: shared-logs
     emptyDir: {}
 
-#Create the pod by following command
+# Save and exit the file
+
+# Create the pod by following command
 # $ kubectl apply -f webserver.yaml
 
-#Watch if pods are running
+# Watch if pods are running
 # $ watch kubectl get pods
 
-#Check the logs getting 'cat' by the sidecar-container
+# Check the logs getting 'cat' by the sidecar-container
 # $ kubectl logs webserver sidecar-container

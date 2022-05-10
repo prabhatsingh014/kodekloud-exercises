@@ -4,6 +4,7 @@
 
 # Edit the file and fill the required defails as per question.
 # $ vi ic-deploy-xfusion.yaml
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:

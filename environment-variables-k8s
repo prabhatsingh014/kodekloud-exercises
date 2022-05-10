@@ -1,6 +1,6 @@
 # Create a yaml file with the correct pod name, container name, image name, and environment variables as asked in the question.
 # $ vi envars.yaml
-
+---
 apiVersion: v1
 kind: Pod
 metadata:
