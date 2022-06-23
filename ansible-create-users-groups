@@ -1,3 +1,5 @@
+**** Something is wrong with this problem solution. I'll figure it out and update
+
 # Create the playbook for creating groups and users on the target nodes
 # $ vi add_users.yaml
 ---
@@ -43,9 +45,11 @@ vault_password_file = /home/thor/playbooks/secrets/vault.txt
 # Save and exit the file
 
 # Execute the ansible-vault command to generate the encrypted passwords for the admin and developer users
-# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'ksH85UJjhb' --name 'devels_pwd'
-# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'Rc5C9EyvbU' --name 'admins_pwd'
+# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'B4zNgHA7Ya' --name 'devels_pwd'
+# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'dCV3szSGNA' --name 'admins_pwd'
 
 # Execute the command to run the playbook
 # $ cd ~/ansible
 # $ ansible-playbook -i inventory add_users.yml
+
+**** Something is wrong with this problem solution. I'll figure it out and update
