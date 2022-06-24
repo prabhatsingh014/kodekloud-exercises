@@ -8,8 +8,6 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: mysql-pv
-  labels:
-    type: local
 spec:
   storageClassName: standard
   capacity:
@@ -37,88 +35,21 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 250Gi
+      storage: 250Mi
 
 # Save and exit the file
 
 # Create the persistent volume claim using the command
 # $ kubectl apply -f mysql-pv-claim.yaml
 
-# Create the service creation yaml file
-# $ vi mysql-service.yaml
----
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    app: mysql-deployment
-  name: mysql
-spec:
-  ports:
-  - port: 80
-    nodePort: 30007
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: mysql-deployment
-  type: NodePort
-status:
-  loadBalancer: {}
+# Create the secret mysql-root-pass using the command
+# $ kubectl create secret generic mysql-root-pass --from-literal=password=YUIidhb667
 
-# Save and exit the file
+# Create the secret mysql-user-pass using the command
+# $ kubectl create secret generic mysql-user-pass --from-literal=username=kodekloud_tim --from-literal=password=YchZHRcLkL
 
-# Create the service using the command
-# $ kubectl apply -f mysql-service.yaml
-
-# Create the secret creation yaml file
-# $ vi mysql-root-secret.yaml
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-root-pass
-type: kubernetes.io/basic-auth
-stringData:
-  password: YUIidhb667
-
-# Save and exit the file
-
-# Create the secret using the command
-# $ kubectl apply -f mysql-root-secret.yaml
-
-# Create the secret creation yaml file
-# $ vi mysql-user-secret.yaml
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-user-pass
-type: kubernetes.io/basic-auth
-stringData:
-  username: kodekloud_sam
-  password: YUIidhb667
-
-# Save and exit the file
-
-# Create the secret using the command
-# $ kubectl apply -f mysql-user-secret.yaml
-
-# Create the secret creation yaml file
-# $ vi mysql-db-secret.yaml
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-db-url
-type: Opaque
-stringData:
-  database: kodekloud_db4
-
-# Save and exit the file
-
-# Create the secret using the command
-# $ kubectl apply -f mysql-db-secret.yaml
+# Create the secret mysql-db-url using the command
+# $ kubectl create secret generic mysql-db-url --from-literal=database=kodekloud_db2
 
 # Create the deployment creation yaml file
 # $ vi mysql-deployment.yaml
@@ -126,26 +57,22 @@ stringData:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
-    app: mysql-deployment
+    app: db
   name: mysql-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql-deployment
-  strategy: {}
+      app: db
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app: mysql-deployment
+        app: db
     spec:
       containers:
       - image: mysql
         name: mysql
-        resources: {}
         volumeMounts:
         - mountPath: "/var/lib/mysql"
           name: mysql-storage
@@ -175,12 +102,34 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-pv-claim
 
-status: {}
-
 # Save and exit the file
 
 # Create the deployment using the command
 # $ kubectl apply -f mysql-deployment.yaml
+
+# Create the service creation yaml file
+# $ vi mysql-service.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: db
+  name: mysql
+spec:
+  ports:
+  - port: 3306
+    nodePort: 30007
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: db
+  type: NodePort
+
+# Save and exit the file
+
+# Create the service using the command
+# $ kubectl apply -f mysql-service.yaml
 
 # Verify the object creation using the command
 # $ kubectl get pv,pvc,secret,service,deployment
