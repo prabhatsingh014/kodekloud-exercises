@@ -1,15 +1,32 @@
 **** Something is wrong with this problem solution. I'll figure it out and update
 
+# Execute the ansible-vault command to generate the encrypted passwords for the admin and developer users
+# $ ansible-vault encrypt_string 'dCV3szSGNA' --name 'devels_pwd'
+# $ ansible-vault encrypt_string 'B4zNgHA7Ya' --name 'admins_pwd'
+
 # Create the playbook for creating groups and users on the target nodes
 # $ vi add_users.yaml
 ---
 - hosts: stapp02
   become: yes
-  vars_files:
-  - /home/thor/playbooks/data/users.yml
-  - /home/thor/playbooks/data/password.yml
+  vars_files: /home/thor/playbooks/data/users.yml
+  vars:
+    devels_pwd: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35353930366337376362623865613532626531363762353733666131636165363239376563656664
+          3635383063393862656133373034376233633636366238310a336263306539353635313934343834
+          64396534393266303335663664663531373339383635356666623537386334383165333661353665
+          3764313561323233310a366434346338396133616663383135346635663331356262393632323331
+          3334
+    admins_pwd: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          34343434366635336363353561346166316564613335326662336161316633323932396130336363
+          6236376432396264626362663532626563613939373165310a386431343635316436353961663965
+          66653538316639306134653533393735613666393362373131623034316462346535663831336562
+          6165386365313961320a353439303762353365316464643034363038303232663039316535333066
+          3738
   tasks:
-  - name: Create groups on app server 3
+  - name: Create groups on app server 2
     group:
       name: "{{ item }}"
       state: present
@@ -17,7 +34,7 @@
     - admins
     - developers
 
-  - name: Create users of admins group on app server 3
+  - name: Create users of admins group on app server 2
     user:
       name: "{{ item }}"
       create_home: yes
@@ -26,10 +43,9 @@
       password: "{{ admins_pwd | string | password_hash('sha512') }}"
     loop: "{{ admins }}"
 
-  - name: Create users of developers group on app server 3
+  - name: Create users of developers group on app server 2
     user:
       name: "{{ item }}"
-      create_home: no
       home: /var/www
       groups: developers
       append: yes
@@ -44,12 +60,9 @@ vault_password_file = /home/thor/playbooks/secrets/vault.txt
 
 # Save and exit the file
 
-# Execute the ansible-vault command to generate the encrypted passwords for the admin and developer users
-# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'B4zNgHA7Ya' --name 'devels_pwd'
-# $ ansible-vault encrypt_string --vault-password-file ~/playbooks/secrets/vault.txt 'dCV3szSGNA' --name 'admins_pwd'
-
 # Execute the command to run the playbook
 # $ cd ~/ansible
 # $ ansible-playbook -i inventory add_users.yml
+
 
 **** Something is wrong with this problem solution. I'll figure it out and update
