@@ -15,7 +15,7 @@
 # $ kubectl get pod webserver -o yaml > webserver.yaml
 
 # Edit the yaml file and correct the image name using vi editor
-# $ vi editor.yaml
+# $ vi webserver.yaml
 
 image: nginx:latests --> image: nginx:latest
 
@@ -27,4 +27,4 @@ image: nginx:latests --> image: nginx:latest
 # $ kubectl apply -f webserver.yaml
 
 # Watch the pod status by executing the following command
-# $ kubectl get pods --Watch
+# $ kubectl get pods --watch
