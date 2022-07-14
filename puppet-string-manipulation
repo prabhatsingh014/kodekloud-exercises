@@ -10,14 +10,14 @@
 # $ cd /etc/puppetlabs/code/environments/production/manifests
 # $ sudo vi cluster.pp
 
-node 'stapp02.stratos.xfusioncorp.com {
+node 'stapp03.stratos.xfusioncorp.com' {
 }
 
-file_line { 'replace_line':
+file_line { 'replaceline':
   ensure => present,
-  path => '/opt/dba/cluster.txt',
-  line => 'Welcome to Nautilus Team!',
-  match => 'Welcome to XFusionCorp Team!',
+  path => '/opt/data/apps.txt',
+  line => 'Welcome to xFusionCorp Industries!',
+  match => 'Welcome to Nautilus Industries!',
 }
 
 # Save and exit file
