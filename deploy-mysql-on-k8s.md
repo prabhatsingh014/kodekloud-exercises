@@ -1,8 +1,11 @@
-# Create the directory on the host machine using the command
-# $ sudo mkdir /mnt/data
+- Create the directory on the host machine using the command
+```
+$ sudo mkdir /mnt/data
+```
 
-# Create the PV creation yaml file
-# $ vi mysql-pv.yaml
+- Create the PV creation yaml file
+```
+$ vi mysql-pv.yaml
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -16,14 +19,17 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/data"
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the persistent volume using the command
+```
+$ kubectl apply -f mysql-pv.yaml
+```
 
-# Create the persistent volume using the command
-# $ kubectl apply -f mysql-pv.yaml
-
-# Create the PVC creation yaml file
-# $ vi mysql-pv-claim.yaml
+- Create the PVC creation yaml file
+```
+$ vi mysql-pv-claim.yaml
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -36,23 +42,32 @@ spec:
   resources:
     requests:
       storage: 250Mi
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the persistent volume claim using the command
+```
+$ kubectl apply -f mysql-pv-claim.yaml
+```
 
-# Create the persistent volume claim using the command
-# $ kubectl apply -f mysql-pv-claim.yaml
+- Create the secret mysql-root-pass using the command
+```
+$ kubectl create secret generic mysql-root-pass --from-literal=password=YUIidhb667
+```
 
-# Create the secret mysql-root-pass using the command
-# $ kubectl create secret generic mysql-root-pass --from-literal=password=YUIidhb667
+- Create the secret mysql-user-pass using the command
+```
+$ kubectl create secret generic mysql-user-pass --from-literal=username=kodekloud_tim --from-literal=password=YchZHRcLkL
+```
 
-# Create the secret mysql-user-pass using the command
-# $ kubectl create secret generic mysql-user-pass --from-literal=username=kodekloud_tim --from-literal=password=YchZHRcLkL
+- Create the secret mysql-db-url using the command
+```
+$ kubectl create secret generic mysql-db-url --from-literal=database=kodekloud_db2
+```
 
-# Create the secret mysql-db-url using the command
-# $ kubectl create secret generic mysql-db-url --from-literal=database=kodekloud_db2
-
-# Create the deployment creation yaml file
-# $ vi mysql-deployment.yaml
+- Create the deployment creation yaml file
+```
+$ vi mysql-deployment.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -101,14 +116,17 @@ spec:
       - name: mysql-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the deployment using the command
+```
+$ kubectl apply -f mysql-deployment.yaml
+```
 
-# Create the deployment using the command
-# $ kubectl apply -f mysql-deployment.yaml
-
-# Create the service creation yaml file
-# $ vi mysql-service.yaml
+- Create the service creation yaml file
+```
+$ vi mysql-service.yaml
 ---
 apiVersion: v1
 kind: Service
@@ -125,11 +143,15 @@ spec:
   selector:
     app: db
   type: NodePort
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the service using the command
+```
+$ kubectl apply -f mysql-service.yaml
+```
 
-# Create the service using the command
-# $ kubectl apply -f mysql-service.yaml
-
-# Verify the object creation using the command
-# $ kubectl get pv,pvc,secret,service,deployment
+- Verify the object creation using the command
+```
+$ kubectl get pv,pvc,secret,service,deployment
+```

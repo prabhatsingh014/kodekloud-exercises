@@ -1,5 +1,6 @@
-# Create the jenkins namespace, deployment, and service objects creation yaml file
-# $ vi jenkins.yaml
+- Create the jenkins namespace, deployment, and service objects creation yaml file
+```
+$ vi jenkins.yaml
 ---
 apiVersion: v1
 kind: Namespace
@@ -56,11 +57,15 @@ spec:
     app: jenkins
 status:
   loadBalancer: {}
+```
+- Save and exit the file
 
-# Save and exit the file
+- Execute the command to create the objects
+```
+$ kubectl apply -f jenkins.yaml
+```
 
-# Execute the command to create the objects
-# $ kubectl apply -f jenkins.yaml
-
-# Verify if all objects have been created properly
-# $ kubectl get all -n jenkins
+- Verify if all objects have been created properly
+```
+$ kubectl get all -n jenkins
+```

@@ -1,5 +1,6 @@
-# Create deployment and service with any grafana image with the following yaml and commands.
-# $ vi grafana-deployment.yaml
+- Create deployment and service with any grafana image with the following yaml and commands.
+```
+$ vi grafana-deployment.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -23,14 +24,16 @@ spec:
             - containerPort: 3000
               name: http-grafana
               protocol: TCP
+```
+- Save and exit the file
+- Run following command to create the deployment
+```
+$ kubectl apply -f grafana-deployment.yaml
+```
 
-# Save and exit the file
-# Run following command to create the deployment
-
-# $ kubectl apply -f grafana-deployment.yaml
-
-# Create service with any name with type as NodePort and nodePort set as given in the question.
-# $ vi grafana-service.yaml
+- Create service with any name with type as NodePort and nodePort set as given in the question.
+```
+$ vi grafana-service.yaml
 ---
 apiVersion: v1
 kind: Service
@@ -45,7 +48,9 @@ spec:
   selector:
     app: grafana
   type: NodePort
-  
-# Run following command to create the service
+```
 
-# $ kubectl apply -f grafana-service.yaml
+- Run following command to create the service
+```
+$ kubectl apply -f grafana-service.yaml
+```

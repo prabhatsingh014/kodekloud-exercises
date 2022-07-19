@@ -1,6 +1,6 @@
-# Create a deployment definition file named redis-master.yaml with the requirements given in the task
-# $ vi redis-master.yaml
-
+- Create a deployment definition file named redis-master.yaml with the requirements given in the task
+```
+$ vi redis-master.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -27,15 +27,17 @@ spec:
           requests:
             cpu: "100m"
             memory: "100Mi"
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the deployment by executing the following command
+```
+$ kubectl apply -f redis-master.yaml
+```
 
-# Create the deployment by executing the following command
-# $ kubectl apply -f redis-master.yaml
-
-# Create a service definition file with name redis-master-service.yaml
-# $ vi redis-master-service.yaml
-
+- Create a service definition file with name redis-master-service.yaml
+```
+$ vi redis-master-service.yaml
 ---
 apiVersion: v1
 kind: Service
@@ -48,15 +50,17 @@ spec:
     - protocol: TCP
       port: 6379
       targetPort: 6379
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the service by executing the following command
+```
+$ kubectl apply -f redis-master-service.yaml
+```
 
-# Create the service by executing the following command
-# $ kubectl apply -f redis-master-service.yaml
-
-# Create a deployment definition file named redis-slave.yaml with the requirements given in the task
-# $ vi redis-slave.yaml
-
+- Create a deployment definition file named redis-slave.yaml with the requirements given in the task
+```
+$ vi redis-slave.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -86,15 +90,17 @@ spec:
           requests:
             cpu: "100m"
             memory: "100Mi"
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the deployment by executing the following command
+```
+$ kubectl apply -f redis-slave.yaml
+```
 
-# Create the deployment by executing the following command
-# $ kubectl apply -f redis-slave.yaml
-
-# Create a service definition file with name redis-slave-service.yaml
-# $ vi redis-slave-service.yaml
-
+- Create a service definition file with name redis-slave-service.yaml
+```
+$ vi redis-slave-service.yaml
 ---
 apiVersion: v1
 kind: Service
@@ -107,15 +113,17 @@ spec:
     - protocol: TCP
       port: 6379
       targetPort: 6379
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the service by executing the following command
+```
+$ kubectl apply -f redis-slave-service.yaml
+```
 
-# Create the service by executing the following command
-# $ kubectl apply -f redis-slave-service.yaml
-
-# Create a deployment definition file with name frontend.yaml with the requirements given in the task
-# $ vi frontend.yaml
-
+- Create a deployment definition file with name frontend.yaml with the requirements given in the task
+```
+$ vi frontend.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -145,15 +153,17 @@ spec:
           requests:
             cpu: "100m"
             memory: "100Mi"
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the deployment by executing the following command
+```
+$ kubectl apply -f frontend.yaml
+```
 
-# Create the deployment by executing the following command
-# $ kubectl apply -f frontend.yaml
-
-# Create a service definition file with name frontend-service.yaml
-# $ vi frontend-service.yaml
-
+- Create a service definition file with name frontend-service.yaml
+```
+$ vi frontend-service.yaml
 ---
 apiVersion: v1
 kind: Service
@@ -168,14 +178,18 @@ spec:
       port: 80
       targetPort: 80
       nodePort: 30009
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the service by executing the following command
+```
+$ kubectl apply -f frontend-service.yaml
+```
 
-# Create the service by executing the following command
-# $ kubectl apply -f frontend-service.yaml
+- Once all the deployment and services are created, verify once if all deployments and services are in the desired state
+```
+$ kubectl get all
+```
 
-# Once all the deployment and services are created, verify once if all deployments and services are in the desired state
-# $ kubectl get all
-
-# As per question, click on the "=" sign on the top right corner of the page, enter port number (nodePort) and click View Port.
-# You should be able to see guest book page where you can enter your message and click on Submit.
+- As per question, click on the "=" sign on the top right corner of the page, enter port number (nodePort) and click View Port.
+- You should be able to see guest book page where you can enter your message and click on Submit.
