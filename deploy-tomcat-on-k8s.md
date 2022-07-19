@@ -1,15 +1,21 @@
-# Check the kubernetes cluster on the jump host server
-# $ kubectl get nodes
+- Check the kubernetes cluster on the jump host server
+```
+$ kubectl get nodes
+```
 
-# Create namespace as mentioned in the question with the following command
-# $ kubectl create ns tomcat-namespace-nautilus
+- Create namespace as mentioned in the question with the following command
+```
+$ kubectl create ns tomcat-namespace-nautilus
+```
 
-# Verify the creation of namespace
-# $ kubectl get ns
+- Verify the creation of namespace
+```
+$ kubectl get ns
+```
 
-# Create the deployment and service definition in a yaml file as given below
-# $ vi tomcat-deployment-nautilus.yaml
-
+- Create the deployment and service definition in a yaml file as given below
+```
+$ vi tomcat-deployment-nautilus.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,11 +56,15 @@ spec:
   selector:
     app: tomcat
   type: NodePort
+```
+- Save and exit the file
 
-# Save and exit the file
+- Create the deployment and service objects by executing the following command
+```
+$ kubectl create -f tomcat-deployment-nautilus.yaml 
+```
 
-# Create the deployment and service objects by executing the following command
-# $ kubectl create -f tomcat-deployment-nautilus.yaml 
-
-# Verify the creation of kubernetes objecte by executing the following command
-# $ kubectl get all -n tomcat-namespace-nautilus
+- Verify the creation of kubernetes objecte by executing the following command
+```
+$ kubectl get all -n tomcat-namespace-nautilus
+```

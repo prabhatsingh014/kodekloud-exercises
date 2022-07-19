@@ -1,5 +1,6 @@
-# Create a yaml file with the correct pod name, container name, image name, and environment variables as asked in the question.
-# $ vi envars.yaml
+- Create a yaml file with the correct pod name, container name, image name, and environment variables as asked in the question.
+```
+$ vi envars.yaml
 ---
 apiVersion: v1
 kind: Pod
@@ -35,18 +36,26 @@ spec:
             fieldRef:
               fieldPath: spec.serviceAccountName
   restartPolicy: Never
-  
-# Save and exit the file
+```
+- Save and exit the file
 
-# Create the pod using following command
-# $ kubectl apply -f envars.yaml 
+- Create the pod using following command
+```
+$ kubectl apply -f envars.yaml 
+```
 
-# Monitoring the status of pod creation with the following command until it starts running
-# $ watch kubectl get pods
+- Monitoring the status of pod creation with the following command until it starts running
+```
+$ watch kubectl get pods
+```
 
-# Check the logs of the POD using following command
-# $ kubectl logs envars
+- Check the logs of the POD using following command
+```
+$ kubectl logs envars
+```
 
-# You can also run the printenv command by taking the shell of POD
-# $ kubectl exec -it envars -- sh
-# # printenv
+- You can also run the printenv command by taking the shell of POD
+```
+$ kubectl exec -it envars -- sh
+# printenv
+```
