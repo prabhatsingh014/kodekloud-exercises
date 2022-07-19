@@ -1,8 +1,11 @@
-# Verify if inventory file consists of host entries
-# $ cat inventory
+- Verify if inventory file consists of host entries
+```
+$ cat inventory
+```
 
-# Create playbook.yml using vi editor to accomplish the tasks given in the question
-# $ vi playbook.yml
+- Create playbook.yml using vi editor to accomplish the tasks given in the question
+```
+$ vi playbook.yml
 ---
 - hosts: stapp01
   become: yes
@@ -42,17 +45,25 @@
         src: /opt/devops
         dest: /var/www/html
         state: link
+```
+- Save and exit the file
 
-# Save and exit the file
+- Dry-run the playbook if all changes are implemented correctly
+```
+$ ansible-playbook -i inventory playbook.yml --check
+```
 
-# Dry-run the playbook if all changes are implemented correctly
-# $ ansible-playbook -i inventory playbook.yml --check
+- Execute the following command to run the playbook
+```
+$ ansible-playbook -i inventory playbook.yml
+```
 
-# Execute the following command to run the playbook
-# $ ansible-playbook -i inventory playbook.yml
+- Verify if all files are created with correct ownership
+```
+$ ansible all -m shell -a 'ls -l /opt/devops' -i inventory 
+```
 
-# Verify if all files are created with correct ownership
-# $ ansible all -m shell -a 'ls -l /opt/devops' -i inventory 
-
-# Verify if the softlinks are created correctly
-# $ ansible all -m shell -a 'ls -l /var/www' -i inventory
+- Verify if the softlinks are created correctly
+```
+$ ansible all -m shell -a 'ls -l /var/www' -i inventory
+```
