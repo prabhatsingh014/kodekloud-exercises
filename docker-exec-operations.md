@@ -1,5 +1,4 @@
-# Login to application server 1 and switch to root user
-
+- Login to application server 1 and switch to root user
 - Execute the command to check the running docker container on the app server 1
 ```
 # docker ps
