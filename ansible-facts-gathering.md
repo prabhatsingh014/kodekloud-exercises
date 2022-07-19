@@ -1,5 +1,6 @@
-# Create index.yml file at the location /home/thor/playbooks with the following content
-# $ vi /home/thor/playbooks/index.yml
+- Create index.yml file at the location /home/thor/playbooks with the following content
+```
+$ vi /home/thor/playbooks/index.yml
 ---
 - hosts: all
   become: yes
@@ -27,12 +28,15 @@
       name: httpd
       state: started
       enabled: yes
+```
+- Save and exit the file
 
-# Save and exit the file
-
-# Execute the ansible playbook to implement the changes
-# $ ansible-playbook -i inventory index.yml 
-
-# Verify if the index.html has been created and httpd service is running on all app servers
-# $ ansible -m shell -a 'cat /var/www/html/index.html' -i inventory all
-# $ ansible -m shell -a 'systemctl status httpd' -i inventory all
+- Execute the ansible playbook to implement the changes
+```
+$ ansible-playbook -i inventory index.yml 
+```
+- Verify if the index.html has been created and httpd service is running on all app servers
+```
+$ ansible -m shell -a 'cat /var/www/html/index.html' -i inventory all
+$ ansible -m shell -a 'systemctl status httpd' -i inventory all
+```

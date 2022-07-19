@@ -1,5 +1,6 @@
-# Create playbook.yaml on the jump host using vi editor
-# $ vi ~/ansible/playbook.yml
+- Create playbook.yaml on the jump host using vi editor
+```
+$ vi ~/ansible/playbook.yml
 ---
 - hosts: all
   become: yes
@@ -27,14 +28,20 @@
       path: /var/www/html/index.html
       insertbefore: BOF
       line: 'Welcome to xFusionCorp Industries!'
+```
+- Save and exit the file
 
-# Save and exit the file
+- Run the ansible playbook using ansible-playbook command
+```
+$ ansible-playbook -i ~/ansible/inventory ~/ansible/playbook.yml
+```
 
-# Run the ansible playbook using ansible-playbook command
-# $ ansible-playbook -i ~/ansible/inventory ~/ansible/playbook.yml
+- Once the playbook is finished, check the ownership and permission of index.html file using ansible adhoc command
+```
+$ ansible all -m shell -a 'ls -l /var/www/html/index.html' -i ~/ansible/inventory 
+```
 
-# Once the playbook is finished, check the ownership and permission of index.html file using ansible adhoc command
-# $ ansible all -m shell -a 'ls -l /var/www/html/index.html' -i ~/ansible/inventory 
-
-# Check the content of the index.html file using ansible adhoc command
-# $ ansible all -m shell -a 'cat /var/www/html/index.html' -i ~/ansible/inventory
+- Check the content of the index.html file using ansible adhoc command
+```
+$ ansible all -m shell -a 'cat /var/www/html/index.html' -i ~/ansible/inventory
+```

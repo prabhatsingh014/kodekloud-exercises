@@ -1,5 +1,6 @@
-# Create playbook.yml using vi editor
-# $ vi ~/ansible/playbook.yml
+- Create playbook.yml using vi editor
+```
+$ vi ~/ansible/playbook.yml
 ---
 - hosts: all
   become: yes
@@ -24,14 +25,21 @@
       group: apache
       mode: 0655
       create: yes
+```
 
-# Save and exit the file
+- Save and exit the file
 
-# Execute the command to run the playbook
-# $ ansible-playbook -i inventory playbook.yml
+- Execute the command to run the playbook
+```
+$ ansible-playbook -i inventory playbook.yml
+```
 
-# Execute the command to verify the content of index.html
-# $ ansible all -m shell -a 'cat /var/www/html/index.html' -i inventory 
+- Execute the command to verify the content of index.html
+```
+$ ansible all -m shell -a 'cat /var/www/html/index.html' -i inventory 
+```
 
-# Execute the command to verify the permission and ownership of the file
-# $ ansible all -m shell -a 'ls -l /var/www/html/index.html' -i inventory
+- Execute the command to verify the permission and ownership of the file
+```
+$ ansible all -m shell -a 'ls -l /var/www/html/index.html' -i inventory
+```

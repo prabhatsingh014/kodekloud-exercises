@@ -1,5 +1,6 @@
-# Create the playbook.yaml to replace the string on all app servers using vi editor
-# $ vi playbook.yaml
+- Create the playbook.yaml to replace the string on all app servers using vi editor
+```
+$ vi playbook.yaml
 ---
 - hosts: all
   become: yes
@@ -24,11 +25,15 @@
       regexp: 'KodeKloud'
       replace: 'xFusionCorp Industries'
     when: inventory_hostname == "stapp03"
+```
+- Save and exit the file
 
-# Save and exit the file
+- Execute the playbook using the command
+```
+$ ansible-playbook -i ~/playbooks/inventory playbook.yaml
+```
 
-# Execute the playbook using the command
-# $ ansible-playbook -i ~/playbooks/inventory playbook.yaml
-
-# Verify the string has been replaced correctly on all app servers using the command
-# $ ansible all -m shell -a 'cat /opt/security/*.txt' -i ~/playbooks/inventory
+- Verify the string has been replaced correctly on all app servers using the command
+```
+$ ansible all -m shell -a 'cat /opt/security/*.txt' -i ~/playbooks/inventory
+```
