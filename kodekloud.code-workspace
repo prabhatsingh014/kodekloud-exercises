@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../terraform-exercises"
+		},
+		{
+			"path": "../30DaysOfPython"
 		}
 	]
 }
